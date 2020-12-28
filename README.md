@@ -134,7 +134,8 @@ delimited list of values.
 The plugin extends standard PDF processing:
 
 ```console
-PATH_TO_DITA_OT/bin/dita -f pdf -o out -i document.ditamap --auth.level=draft|review|final --auth.token=<token>
+PATH_TO_DITA_OT/bin/dita -f pdf -o out -i document.ditamap \
+  --auth.level=draft|review|final --auth.token=<token>
 ```
 
 `auth.token` is an OAuth2 access token. if the provided access token is valid, the preferred watermark will be used
