@@ -1,6 +1,6 @@
 # Watermark Auth Plugin for DITA-OT
 
-[![license](https://img.shields.io/github/license/jason-fox/fox.jason.watermarkauth.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![license](https://img.shields.io/github/license/jason-fox/fox.jason.watermark.auth.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![DITA-OT 3.6](https://img.shields.io/badge/DITA--OT-3.6-blue.svg)](http://www.dita-ot.org/3.6)
 [![Documentation Status](https://readthedocs.org/projects/watermarkdita-ot/badge/?version=latest)](https://watermarkdita-ot.readthedocs.io/en/latest/?badge=latest)
 
