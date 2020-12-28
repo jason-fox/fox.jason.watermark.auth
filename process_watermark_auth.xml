@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!--ant--><!--
+	This file is part of the DITA-OT Watermark Auth Plug-in project.
+	See the accompanying LICENSE file for applicable licenses.
+--><project xmlns:if="ant:if" xmlns:dita="http://dita-ot.sourceforge.net" name="fox.jason.watermark.auth">
+	<!--
+		Default to draft, but change to final or review if authorization passed.
+	-->
+	<target name="watermark.auth">
+		<property name="auth.product" value="watermark"/>
+		<authorize-action if:true="${auth.watermark.review}" token="${auth.token}" product="${auth.product}" action="review" />
+		<authorize-action if:true="${auth.watermark.final}" token="${auth.token}" product="${auth.product}" action="final"/>
+		<authorize-action if:true="${auth.watermark.none}" token="${auth.token}" product="${auth.product}" action="none"/>
+	</target>
+
+	<!--
+		Ensure that Watermark is not passed on the command line,
+		and that password is present if necessary.
+	-->
+	<target name="watermark.check">
+		<typedef file="${dita.plugin.fox.jason.watermark.auth.dir}/resource/antlib.xml"/>
+		<dita-ot-fail id="AUTH001F" if:set="pdf.watermark"/>
+		<condition property="auth.watermark.review">
+			<equals arg1="${auth.level}" arg2="review"/>
+		</condition>
+		<condition property="auth.watermark.final">
+			<equals arg1="${auth.level}" arg2="final"/>
+		</condition>
+		<condition property="auth.watermark.none">
+			<equals arg1="${auth.level}" arg2="none"/>
+		</condition>
+
+		<condition property="auth.token.needed">
+			<and>
+				<or>
+					<isset property="auth.watermark.review"/>
+					<isset property="auth.watermark.final"/>
+					<isset property="auth.watermark.none"/>
+				</or>
+				 <not>
+					<isset property="auth.token"/>
+				</not>
+			</and>
+		</condition>
+
+		<condition property="auth.password.not.found">
+			<and>
+				<isset property="auth.token.needed"/>
+				<not>
+					<isset property="auth.password"/>
+				</not>
+			</and>
+		</condition>
+
+		<dita-ot-fail id="AUTH002F" if:set="auth.password.not.found"/>
+		<property name="auth.user" value="${user.name}"/>
+		<login-user if:set="auth.token.needed" username="${auth.user}" password="${auth.password}"/>
+	</target>
+
+</project>

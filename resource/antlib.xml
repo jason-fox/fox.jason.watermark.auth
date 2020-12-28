@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--ant-->
+<antlib xmlns:if="ant:if" xmlns:unless="ant:unless" >
+
+
+	<!--
+		Macro for obtaining a token
+	-->
+	<macrodef name="login-user">
+		<attribute name="username"/>
+		<attribute name="password"/>
+		<sequential>
+			<local name="login.result" />
+			<local name="login.out" />
+			<local name="login.temp.file" />
+			<local name="login.response" />
+			<local name="login.success"/>
+			<local name="auth.token.url"/>
+
+			<property file="${dita.plugin.fox.jason.watermark.auth.dir}/cfg/configuration.properties"/>
+			<tempfile deleteonexit="true" destdir="${dita.temp.dir}" 
+				property="login.temp.file" suffix=".txt"/>			
+			<exec taskname="login" executable="curl" osfamily="unix" 
+				resultproperty="login.result" outputproperty="login.out">
+				<arg value="-X"/>
+				<arg value="POST"/>
+				<arg value="-H"/>
+				<arg value="Content-Type: application/x-www-form-urlencoded"/>
+				<arg value="--data-urlencode"/>
+				<arg value="username=@{username}"/>
+				<arg value="--data-urlencode"/>
+				<arg value="password=@{password}"/>
+				<arg value="--output"/>
+				<arg value="${login.temp.file}"/>
+				<arg value="-fsS"/>
+				<arg value="${auth.token.url}"/>
+			</exec>
+			<condition property="login.success">
+				<equals arg1="${login.result}" arg2="0"/>
+			</condition>
+
+			<dita-ot-fail id="AUTH005F" unless:set="login.success"/>
+			<loadfile property="auth.token" srcFile="${login.temp.file}"/>
+		</sequential>
+	</macrodef>
+
+	<!--
+		Macro to send for authorization. This will need to be altered for a live
+		service.
+	-->
+	<macrodef name="authorize-action">
+		<attribute name="token"/>
+		<attribute name="product"/>
+		<attribute name="action"/>
+		<sequential>
+			<local name="auth.pep.url" />
+			<local name="authorized" />
+			<local name="auth.result" />
+			<local name="auth.out" />
+			<local name="auth.temp.file" />
+			<local name="auth.response" />
+
+			<property file="${dita.plugin.fox.jason.watermark.auth.dir}/cfg/configuration.properties"/>
+			<tempfile deleteonexit="true" destdir="${dita.temp.dir}" 
+				property="auth.temp.file" suffix=".txt"/>
+			<get taskname="authorize" src="${auth.pep.url}/@{product}/@{action}" 
+				dest="${auth.temp.file}"  quiet="true" ignoreerrors="true">
+				<header name="authorization" value="Bearer @{token}"/>
+			</get>
+			<loadfile property="auth.response" srcFile="${auth.temp.file}" failonerror="false" quiet="true"/>
+			<condition property="authorized">
+				<equals arg1="${auth.response}" arg2="permit"/>
+			</condition>
+			<!--
+				Update the watermark if authorization is successful.
+			-->
+			<dita-ot-echo id="AUTH003W" unless:set="authorized">
+				<param name="1" value="@{action}"/>
+			</dita-ot-echo>
+			<dita-ot-echo id="AUTH004I" if:set="authorized">
+				<param name="1" value="@{action}"/>
+			</dita-ot-echo>
+
+			<property if:set="authorized" name="pdf.watermark" value="@{action}"/>
+		</sequential>
+	</macrodef>
+</antlib>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="dita-ot/plugin.rnc" type="application/relax-ng-compact-syntax"?>
+<!--
+	This file is part of the DITA-OT Watermark Plug-in project.
+	See the accompanying LICENSE file for applicable licenses.
+-->
+<plugin id="fox.jason.watermark.auth" version="1.0.0">
+
+	<feature extension="ant.import" file="process_watermark_auth.xml"/>
+	<feature extension="watermark.pre" value="watermark.auth"/>
+	<feature extension="depend.preprocess.pre" value="watermark.check"/>
+	<require plugin="fox.jason.watermark"/>
+
+	
+	<transtype name="pdf" desc="PDF">
+		<param name="auth.level" desc="Level of authorization" type="enum">
+			<val default="true">draft</val>
+			<val>review</val>
+			<val>final</val>
+		</param>
+		<param name="auth.password" desc="Password for IDM" type="string"/>
+		<param name="auth.user" desc="Username for IDM" type="string"/>
+		<param name="auth.token" desc="Token for authorization" type="string"/>
+	</transtype>
+	<!-- Ensure the plugin's error and logging messages are available -->
+	<feature extension="dita.xsl.messages" file="resource/messages.xml"/>
+</plugin>

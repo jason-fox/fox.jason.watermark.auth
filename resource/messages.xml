@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  This file is part of the DITA-OT Watermark Auth Plug-in project.
+  See the accompanying LICENSE file for applicable licenses.
+-->
+<messages>
+	<message id="AUTH001F" type="FATAL">
+		<reason>PDF Watermark already defined.</reason>
+		<response>The pdf.watermark should not be passed directly on the command line</response>
+	</message>
+	<message id="AUTH002F" type="FATAL">
+		<reason>Authorization Token missing.</reason>
+		<response>Add an auth.token to the command line when authorizing for review or final. An auth.user and auth.password can also be added to generate a new token.</response>
+	</message>
+	<message id="AUTH003W" type="WARN">
+		<reason>Authorization for '%1' failed.</reason>
+		<response/>
+	 </message>
+	 <message id="AUTH004I" type="INFO">
+		<reason>Authorization for '%1' succeeded.</reason>
+		<response/>
+	 </message>
+	 <message id="AUTH005F" type="FATAL">
+		<reason>Unauthorized.</reason>
+		<response>Username or Password is invalid.</response>
+	</message>
+</messages>
