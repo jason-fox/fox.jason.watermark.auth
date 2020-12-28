@@ -36,14 +36,14 @@ However **authorized** users are able to remove the watermark to create a publis
 
 ## Install
 
-The DITA-OT Authorized Watermark Plugin plug-in has been tested against [DITA-OT 3.x](http://www.dita-ot.org/download). It is recommended that
+The DITA-OT Authorized Watermark plug-in has been tested against [DITA-OT 3.x](http://www.dita-ot.org/download). It is recommended that
 you upgrade to the latest version.
 
 ### Installing DITA-OT
 
 <a href="https://www.dita-ot.org"><img src="https://www.dita-ot.org/images/dita-ot-logo.svg" align="right" height="55"></a>
 
-The DITA-OT Watermark Authorization plug-in is a plug-in for the DITA Open Toolkit.
+The DITA-OT Authorization Watermark plug-in is a plug-in for the DITA Open Toolkit.
 
 -   Full installation instructions for downloading DITA-OT can be found
     [here](https://www.dita-ot.org/3.6/topics/installing-client.html).
