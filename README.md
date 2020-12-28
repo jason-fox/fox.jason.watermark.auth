@@ -72,8 +72,8 @@ dita install https://github.com/jason-fox/fox.jason.watermark.auth/archive/maste
 
 #### Connecting to Authorization service
 
-Two settings are placed in the `cfg/configuration.properties` file. These Currently this just send a data to a simple
-authorization service defined below, which is assumed to be running on `localhost:3000` - amend the settings as
+Two settings are placed in the `cfg/configuration.properties` file. These currently just send a data to a simple
+authorization service defined below, which initially is assumed to be running on `localhost:3000` - amend the settings as
 necessary when hosting the service elsewhere.
 
 ```text
