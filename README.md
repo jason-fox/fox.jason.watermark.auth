@@ -1,4 +1,4 @@
-# Watermark Auth Plugin for DITA-OT
+# **Authorized** Watermark Plugin for DITA-OT [<img src="https://jason-fox.github.io/fox.jason.watermark/watermark.png" align="right" width="300">](http://watermarkdita-ot.rtfd.io/)
 
 [![license](https://img.shields.io/github/license/jason-fox/fox.jason.watermark.auth.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![DITA-OT 3.6](https://img.shields.io/badge/DITA--OT-3.6-blue.svg)](http://www.dita-ot.org/3.6)
@@ -8,6 +8,12 @@ This is an example [DITA-OT Plug-in](https://www.dita-ot.org/plugins) to authori
 files. The plugin uses the extension-point offered by the
 [DITA-OT Watermark plug-in](https://github.com/jason-fox/fox.jason.watermark) to make a request to an authorization
 server to decide whether a user has rights to create a document of the given type.
+
+By default users will only be able to create defaced documents with a watermark as shown:
+
+> ![](https://jason-fox.github.io/fox.jason.watermark/watermark-pdf.png)
+
+However **authorized** users are able to remove the watermark to create a publishable document.
 
 > **Note** The example `authorize-user` macro in [`resource/antlib.xml`](./resource/antlib.xml) is not connecting to a
 > valid authorization server and therefore the code will need to be updated to work with a live system.
@@ -100,7 +106,7 @@ The Dummy IDM recognises the following users passwords and tokens:
 
 Alice and Bob have full authorization rights, Charlie `draft` and `review` and Eve can `draft` only.
 
-#### Using a real IDM service (Keyrock)
+#### Using a real IDM service (Keyrock) <a href="https://fiware-idm.readthedocs.io/"><img src="https://jason-fox.github.io/fox.jason.watermark/Keyrock.png" align="right" height="55"></a>
 
 [Keyrock](https://fiware-idm.readthedocs.io/) a full Identity Management server which offers OAuth2-based authentication
 and authorization interfaces.
