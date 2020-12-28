@@ -36,7 +36,7 @@ However **authorized** users are able to remove the watermark to create a publis
 
 ## Install
 
-The DITA-OT Water plug-in has been tested against [DITA-OT 3.x](http://www.dita-ot.org/download). It is recommended that
+The DITA-OT Authorized Watermark Plugin plug-in has been tested against [DITA-OT 3.x](http://www.dita-ot.org/download). It is recommended that
 you upgrade to the latest version.
 
 ### Installing DITA-OT
